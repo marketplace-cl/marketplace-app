@@ -10,7 +10,9 @@ const StackRoutes = () => {
       <Stack.Screen
         name="MainLayout"
         component={TabRoutes}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+        }}
       />
     </Stack.Navigator>
   );
