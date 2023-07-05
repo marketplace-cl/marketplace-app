@@ -6,14 +6,18 @@ import {
   Image,
   TouchableOpacity,
   Pressable,
+  Alert,
 } from "react-native";
 import React from "react";
 import Constants from "expo-constants";
 import { Entypo, AntDesign, Ionicons } from "@expo/vector-icons";
 import ProfileItem from "./components/ProfileItem";
 import LineDivider from "../../components/LineDivider";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 const Profile = () => {
+  const { currentUser } = useAuthContext();
+
   return (
     <View
       style={{
@@ -26,7 +30,12 @@ const Profile = () => {
     >
       <Text className="self-center text-base mt-2">Meu Perfil</Text>
 
-      <TouchableOpacity className="p-3 flex-row items-center justify-between mt-3">
+      <TouchableOpacity
+        onPress={() => {
+          currentUser ? Alert.alert("logado") : Alert.alert("deslogado");
+        }}
+        className="p-3 flex-row items-center justify-between mt-3"
+      >
         <View className="flex-row items-center">
           <Image
             source={{
@@ -36,8 +45,12 @@ const Profile = () => {
           />
 
           <View className="ml-3">
-            <Text>Carlos Henrique</Text>
-            <Text>Editar Perfil</Text>
+            <Text className="text-base text-zinc-800 font-semibold">
+              Carlos Henrique
+            </Text>
+            <Text className="text-sm text-gray-500 font-medium">
+              Editar Perfil
+            </Text>
           </View>
         </View>
 

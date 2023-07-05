@@ -20,7 +20,7 @@ export default function ProfileItem({
       <View className="flex-row items-center">
         {icon}
         <View className="ml-4">
-          <Text className="text-base font-semibold">{title}</Text>
+          <Text className="text-base font-medium">{title}</Text>
           <Text className="text-xs font-medium text-gray-500">{subtitle}</Text>
         </View>
       </View>
