@@ -4,6 +4,7 @@ import Home from "../../screens/Home";
 import Search from "../../screens/Search";
 import Bag from "../../screens/Bag";
 import Profile from "../../screens/Profile";
+import { Ionicons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
@@ -14,28 +15,52 @@ const TabRoutes = () => {
         name="Home"
         component={Home}
         options={{
-          tabBarLabel: "Home",
+          tabBarIcon: ({ color, size, focused }) =>
+            focused ? (
+              <Ionicons name="home" size={30} color={"#4AAD95"} />
+            ) : (
+              <Ionicons name="home-outline" size={30} color="gray" />
+            ),
+          tabBarShowLabel: false,
         }}
       />
       <Tab.Screen
         name="Search"
         component={Search}
         options={{
-          tabBarLabel: "Buscar",
+          tabBarIcon: ({ color, size, focused }) =>
+            focused ? (
+              <Ionicons name="search" size={30} color={"#4AAD95"} />
+            ) : (
+              <Ionicons name="search-outline" size={30} color="gray" />
+            ),
+          tabBarShowLabel: false,
         }}
       />
       <Tab.Screen
         name="Bag"
         component={Bag}
         options={{
-          tabBarLabel: "Bolsa",
+          tabBarIcon: ({ color, size, focused }) =>
+            focused ? (
+              <Ionicons name="cart" size={30} color={"#4AAD95"} />
+            ) : (
+              <Ionicons name="cart-outline" size={30} color="gray" />
+            ),
+          tabBarShowLabel: false,
         }}
       />
       <Tab.Screen
         name="Profile"
         component={Profile}
         options={{
-          tabBarLabel: "Perfil",
+          tabBarIcon: ({ color, size, focused }) =>
+            focused ? (
+              <Ionicons name="person" size={30} color={"#4AAD95"} />
+            ) : (
+              <Ionicons name="person-outline" size={30} color="gray" />
+            ),
+          tabBarShowLabel: false,
         }}
       />
     </Tab.Navigator>
