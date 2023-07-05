@@ -5,9 +5,9 @@ import RootNavigation from "./src/routes";
 
 export default function App() {
   return (
-    <View>
+    <>
       <RootNavigation />
       <StatusBar style="auto" />
-    </View>
+    </>
   );
 }
