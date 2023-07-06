@@ -8,6 +8,7 @@ import {
   ImageBackground,
   ScrollView,
   FlatList,
+  Platform,
 } from "react-native";
 import React from "react";
 import { Ionicons, SimpleLineIcons } from "@expo/vector-icons";
@@ -15,12 +16,22 @@ import categories from "../../data/categories";
 import Categories from "./components/Categories";
 import clothes from "../../data/clothes";
 import ProductCard from "./components/ProductCard";
+import Constants from "expo-constants";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const Home = () => {
+  const { bottom } = useSafeAreaInsets();
+
   return (
     <ScrollView
+      contentContainerStyle={{
+        paddingBottom: bottom * 1.5,
+      }}
       style={{
-        paddingTop: StatusBar.currentHeight,
+        paddingTop:
+          Platform.OS === "android"
+            ? StatusBar.currentHeight
+            : Constants.statusBarHeight,
       }}
     >
       <ImageBackground
@@ -59,6 +70,7 @@ const Home = () => {
           <Categories key={index} {...category} />
         ))}
       </ScrollView>
+
       <View className="flex-row flex-wrap">
         {clothes.map((cloth, index) => (
           <ProductCard key={index} {...cloth} />

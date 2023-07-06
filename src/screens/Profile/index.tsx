@@ -16,7 +16,7 @@ import LineDivider from "../../components/LineDivider";
 import { useAuthContext } from "../../contexts/AuthContext";
 
 const Profile = () => {
-  const { currentUser } = useAuthContext();
+  const { currentUser, user } = useAuthContext();
 
   return (
     <View
@@ -46,7 +46,7 @@ const Profile = () => {
 
           <View className="ml-3">
             <Text className="text-base text-zinc-800 font-semibold">
-              Carlos Henrique
+              {user?.name}
             </Text>
             <Text className="text-sm text-gray-500 font-medium">
               Editar Perfil
