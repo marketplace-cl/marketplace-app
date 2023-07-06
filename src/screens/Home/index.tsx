@@ -1,24 +1,47 @@
 import {
   View,
   Text,
-  SafeAreaView,
   StatusBar,
   TextInput,
   Pressable,
   ImageBackground,
   ScrollView,
-  FlatList,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { Ionicons, SimpleLineIcons } from "@expo/vector-icons";
-import categories from "../../data/categories";
 import Categories from "./components/Categories";
-import clothes from "../../data/products";
 import ProductCard from "./components/ProductCard";
 import { useNavigation } from "@react-navigation/native";
+import { Product } from "../../types/ProductState.types";
+import { makeRequest } from "../../services/request.service";
+import { useDispatch } from "react-redux";
+import { productSlice } from "../../store/ProductSlice";
 
 const Home = () => {
+  const [products, setProducts] = React.useState<Product[] | []>([]);
+  const [categories, setCategories] = React.useState<
+    Array<{ _id: string; name: string; icon: string }> | []
+  >([]);
+
+  const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  useEffect(() => {
+    pullData();
+  }, []);
+
+  const pullData = async () => {
+    const [productResponse, categoryResponse] = await Promise.all([
+      makeRequest.get("/products"),
+      makeRequest.get("/categories"),
+    ]);
+    setProducts(productResponse.data);
+    setCategories(categoryResponse.data);
+    dispatch(
+      productSlice.actions.setProducts(JSON.parse(productResponse.data))
+    );
+  };
+
   return (
     <ScrollView
       style={{
@@ -45,13 +68,13 @@ const Home = () => {
             80% OFF
           </Text>
           <Text className="text-gray-600">
-            Discover fashion that suits to your style
+            Descubra a moda que combina com o seu estilo
           </Text>
           <Pressable
             className="bg-secondary py-2 px-3 w-[130px] rounded-md"
             onPress={() => navigation.navigate("Login")}
           >
-            <Text className=" text-white mx-auto">Check this out</Text>
+            <Text className=" text-white mx-auto">Checar agora</Text>
           </Pressable>
         </View>
       </ImageBackground>
@@ -65,8 +88,8 @@ const Home = () => {
         ))}
       </ScrollView>
       <View className="flex-row flex-wrap">
-        {clothes.map((cloth, index) => (
-          <ProductCard key={index} {...cloth} />
+        {products.map((product, index) => (
+          <ProductCard key={index} {...product} />
         ))}
       </View>
     </ScrollView>

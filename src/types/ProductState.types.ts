@@ -4,10 +4,11 @@ export interface ProductState {
 }
 
 export interface Product {
-  id: string;
+  _id: string;
   title: string;
+  comments: any[];
   price: number;
-  categorie: string;
+  category: string;
   rate: number;
   totalOfReviews: number;
   image: string;

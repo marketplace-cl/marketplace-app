@@ -46,37 +46,39 @@ const Login = () => {
       <View className="justify-evenly flex-1">
         <View>
           <Text className="text-4xl font-bold">Hey,</Text>
-          <Text className="text-4xl font-bold">Login Now!</Text>
+          <Text className="text-4xl font-bold">Faça login agora!</Text>
         </View>
         <View className="flex-row">
-          <Text className="text-gray-400">I Am A Old User / </Text>
+          <Text className="text-gray-400">Já sou usuário / </Text>
           <Pressable onPress={() => navigation.navigate("Register")}>
-            <Text className="font-bold">Create New </Text>
+            <Text className="font-bold">Criar conta </Text>
           </Pressable>
         </View>
         <View className="gap-4">
           <TextInput
-            placeholder="Username"
+            placeholder="Usuário"
             className="bg-gray-200 py-2 px-3 font-bold"
             value={user.username}
             onChangeText={(value) => setUser({ ...user, username: value })}
           />
           <TextInput
             secureTextEntry
-            placeholder="Password"
+            placeholder="Senha"
             className="bg-gray-200 py-2 px-3 font-bold"
             value={user.password}
             onChangeText={(value) => setUser({ ...user, password: value })}
           />
         </View>
         <View className="flex-row">
-          <Text className="text-gray-400">Forget Password? / </Text>
+          <Text className="text-gray-400">Esqueceu a senha? / </Text>
           <Pressable>
-            <Text className="font-bold">Reset</Text>
+            <Text className="font-bold">Recuperar</Text>
           </Pressable>
         </View>
         <Pressable className="bg-primary py-4 rounded-lg" onPress={handleLogin}>
-          <Text className="text-center font-bold uppercase">Login Now</Text>
+          <Text className="text-center font-bold uppercase text-white">
+            Entrar
+          </Text>
         </Pressable>
       </View>
     </View>
