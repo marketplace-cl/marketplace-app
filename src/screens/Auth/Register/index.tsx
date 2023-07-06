@@ -49,11 +49,11 @@ const Register = () => {
       <View className="justify-evenly flex-1">
         <View>
           <Text className="text-4xl font-bold">Hey,</Text>
-          <Text className="text-4xl font-bold">Register Now!</Text>
+          <Text className="text-4xl font-bold">Registrar agora!</Text>
         </View>
         <View className="gap-4">
           <TextInput
-            placeholder="Username"
+            placeholder="Usuário"
             className="bg-gray-200 py-2 px-3 font-bold"
             value={user.username}
             onChangeText={(value) => setUser({ ...user, username: value })}
@@ -66,7 +66,7 @@ const Register = () => {
           />
           <TextInput
             secureTextEntry
-            placeholder="Password"
+            placeholder="Senha"
             className="bg-gray-200 py-2 px-3 font-bold"
             value={user.password}
             onChangeText={(value) => setUser({ ...user, password: value })}
@@ -76,7 +76,9 @@ const Register = () => {
           className="bg-primary py-4 rounded-lg"
           onPress={handleRegister}
         >
-          <Text className="text-center font-bold uppercase ">Register Now</Text>
+          <Text className="text-center font-bold uppercase text-white">
+            Registrar
+          </Text>
         </Pressable>
       </View>
     </View>

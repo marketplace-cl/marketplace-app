@@ -8,33 +8,40 @@ import { useNavigation } from "@react-navigation/native";
 interface IProps {
   title: string;
   price: number;
-  categorie: string;
+  category: string;
   rate: number;
   totalOfReviews: number;
   image: string;
-  id: string;
+  _id: string;
+  comments: any[];
 }
 
 const ProductCard = ({
-  categorie,
+  category,
   image,
   price,
   rate,
   title,
   totalOfReviews,
-  id,
+  _id,
+  comments,
 }: IProps) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
+  let pounds = Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+
   const handlePress = () => {
-    dispatch(productSlice.actions.setSelectedProduct(id));
+    dispatch(productSlice.actions.setSelectedProduct(_id));
     navigation.navigate("ProductDetails");
   };
 
   return (
     <Pressable
-      className="h-[250px] w-[46%] rounded-md overflow-hidden m-[2%]"
+      className="h-[300px] w-[46%] rounded-md overflow-hidden m-[2%]"
       onPress={handlePress}
     >
       <Image
@@ -43,19 +50,17 @@ const ProductCard = ({
         className="h-[50%] w-full object-cover"
       />
       <View className="p-2 bg-white flex-1 justify-around">
-        <Text className="text-gray-400">{categorie}</Text>
+        <Text className="text-gray-400">{category}</Text>
         <Text className="text-secondary font-bold">{title}</Text>
-        <View className="flex-row justify-between items-center">
-          <View className="flex-row gap-1 items-center">
-            <FontAwesome name="star" size={15} color="#eab308" />
-            <Text className="text-sm text-gray-400">
-              {rate} | {totalOfReviews}
-            </Text>
-          </View>
-          <Text className="text-primary font-bold text-xl">
-            ${price.toFixed(2).replace(".", ",")}
+        <View className="flex-row gap-1 items-center">
+          <FontAwesome name="star" size={15} color="#eab308" />
+          <Text className="text-sm text-gray-400">
+            {rate} | {totalOfReviews}
           </Text>
         </View>
+        <Text className="text-primary font-bold text-xl">
+          {pounds.format(price)}
+        </Text>
       </View>
     </Pressable>
   );
