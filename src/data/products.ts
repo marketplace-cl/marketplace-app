@@ -3,7 +3,6 @@ import { v4 as uuid } from "uuid";
 
 export default [
   {
-    id: uuid(),
     title: `Smart TV 43" UHD 4K Samsung 43AU7700, Processador Crystal 4K,`,
     price: 1400,
     categorie: "Clothes",
@@ -18,7 +17,6 @@ export default [
     ],
   },
   {
-    id: uuid(),
     title: `Essentials Men's Regular Fit Formal Shirt`,
     price: 12,
     categorie: "Clothes",
@@ -29,7 +27,6 @@ export default [
     images: [],
   },
   {
-    id: uuid(),
     title: `Essentials Men's Regular Fit Formal Shirt`,
     price: 12,
     categorie: "Clothes",
@@ -40,7 +37,6 @@ export default [
     images: [],
   },
   {
-    id: uuid(),
     title: `Essentials Men's Regular Fit Formal Shirt`,
     price: 12,
     categorie: "Clothes",
@@ -51,7 +47,6 @@ export default [
     images: [],
   },
   {
-    id: uuid(),
     title: `Essentials Men's Regular Fit Formal Shirt`,
     price: 12,
     categorie: "Clothes",
@@ -62,7 +57,6 @@ export default [
     images: [],
   },
   {
-    id: uuid(),
     title: `Essentials Men's Regular Fit Formal Shirt`,
     price: 12,
     categorie: "Clothes",

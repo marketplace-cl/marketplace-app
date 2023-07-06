@@ -11,6 +11,7 @@ export default function App() {
     <Provider store={store}>
       <AuthContextProvider>
         <RootNavigation />
+        <StatusBar style="dark" />
       </AuthContextProvider>
     </Provider>
   );
