@@ -1,6 +1,9 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
 import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
+import { productSlice } from "../../../../store/ProductSlice";
+import { useNavigation } from "@react-navigation/native";
 
 interface IProps {
   title: string;
@@ -9,6 +12,7 @@ interface IProps {
   rate: number;
   totalOfReviews: number;
   image: string;
+  id: string;
 }
 
 const ProductCard = ({
@@ -18,9 +22,21 @@ const ProductCard = ({
   rate,
   title,
   totalOfReviews,
+  id,
 }: IProps) => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const handlePress = () => {
+    dispatch(productSlice.actions.setSelectedProduct(id));
+    navigation.navigate("ProductDetails");
+  };
+
   return (
-    <View className="h-[250px] w-[46%] rounded-md overflow-hidden m-[2%]">
+    <Pressable
+      className="h-[250px] w-[46%] rounded-md overflow-hidden m-[2%]"
+      onPress={handlePress}
+    >
       <Image
         source={{ uri: image }}
         alt={title}
@@ -41,7 +57,7 @@ const ProductCard = ({
           </Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

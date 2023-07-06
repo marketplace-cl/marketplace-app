@@ -14,14 +14,15 @@ import React from "react";
 import { Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 import categories from "../../data/categories";
 import Categories from "./components/Categories";
-import clothes from "../../data/clothes";
+import clothes from "../../data/products";
 import ProductCard from "./components/ProductCard";
-import Constants from "expo-constants";
+import { useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import Constants from "expo-constants";
 
 const Home = () => {
+  const navigation = useNavigation();
   const { bottom } = useSafeAreaInsets();
-
   return (
     <ScrollView
       contentContainerStyle={{
@@ -56,7 +57,10 @@ const Home = () => {
           <Text className="text-gray-600">
             Discover fashion that suits to your style
           </Text>
-          <Pressable className="bg-secondary py-2 px-3 w-[130px] rounded-md">
+          <Pressable
+            className="bg-secondary py-2 px-3 w-[130px] rounded-md"
+            onPress={() => navigation.navigate("Login")}
+          >
             <Text className=" text-white mx-auto">Check this out</Text>
           </Pressable>
         </View>
