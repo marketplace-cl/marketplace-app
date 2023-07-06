@@ -13,7 +13,7 @@ import React from "react";
 import { Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 import categories from "../../data/categories";
 import Categories from "./components/Categories";
-import clothes from "../../data/clothes";
+import clothes from "../../data/products";
 import ProductCard from "./components/ProductCard";
 
 const Home = () => {
