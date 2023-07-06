@@ -15,8 +15,10 @@ import categories from "../../data/categories";
 import Categories from "./components/Categories";
 import clothes from "../../data/products";
 import ProductCard from "./components/ProductCard";
+import { useNavigation } from "@react-navigation/native";
 
 const Home = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView
       style={{
@@ -45,7 +47,10 @@ const Home = () => {
           <Text className="text-gray-600">
             Discover fashion that suits to your style
           </Text>
-          <Pressable className="bg-secondary py-2 px-3 w-[130px] rounded-md">
+          <Pressable
+            className="bg-secondary py-2 px-3 w-[130px] rounded-md"
+            onPress={() => navigation.navigate("Login")}
+          >
             <Text className=" text-white mx-auto">Check this out</Text>
           </Pressable>
         </View>
