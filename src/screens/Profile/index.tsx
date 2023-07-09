@@ -13,10 +13,18 @@ import Constants from "expo-constants";
 import { Entypo, AntDesign, Ionicons } from "@expo/vector-icons";
 import ProfileItem from "./components/ProfileItem";
 import LineDivider from "../../components/LineDivider";
-import { useAuthContext } from "../../contexts/AuthContext";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { logout } from "../../store/UserSlice";
 
 const Profile = () => {
-  const { currentUser, user } = useAuthContext();
+  const currentUser = useAppSelector((state) => state.user.currentUser?.data);
+  const dispatch = useAppDispatch();
+
+  async function handleLogout() {
+    await AsyncStorage.removeItem("persist:root");
+    dispatch(logout());
+  }
 
   return (
     <View
@@ -31,9 +39,7 @@ const Profile = () => {
       <Text className="self-center text-base mt-2">Meu Perfil</Text>
 
       <TouchableOpacity
-        onPress={() => {
-          currentUser ? Alert.alert("logado") : Alert.alert("deslogado");
-        }}
+        onPress={() => {}}
         className="p-3 flex-row items-center justify-between mt-3"
       >
         <View className="flex-row items-center">
@@ -46,10 +52,10 @@ const Profile = () => {
 
           <View className="ml-3">
             <Text className="text-base text-zinc-800 font-semibold">
-              {user?.name}
+              {currentUser?.username ?? "Usuario desconectado"}
             </Text>
             <Text className="text-sm text-gray-500 font-medium">
-              Editar Perfil
+              Editar conta
             </Text>
           </View>
         </View>
@@ -79,7 +85,7 @@ const Profile = () => {
         icon={<Ionicons name="notifications" size={24} color="gray" />}
       />
 
-      <Pressable className="self-center mt-4">
+      <Pressable onPress={handleLogout} className="self-center mt-4">
         <Text className="text-red-500">Sair do App</Text>
       </Pressable>
     </View>

@@ -13,6 +13,8 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { makeRequest } from "../../../services/request.service";
 import authService from "../../../services/auth.service";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../../store/UserSlice";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -21,18 +23,24 @@ const Login = () => {
     password: "",
   });
   const [loading, setLoading] = React.useState(false);
+  const dispatch = useDispatch();
 
   const handleLogin = async () => {
     setLoading(true);
     try {
       const response = await authService.login(user);
-      console.log(JSON.stringify(response, null, 2));
+      if (response.success) {
+        const { success, ...others } = response;
+        dispatch(loginSuccess(others));
+        navigation.goBack();
+      }
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <View
       style={{
