@@ -8,7 +8,7 @@ export interface Product {
   title: string;
   comments: any[];
   price: number;
-  category: string;
+  category: any;
   rate: number;
   totalOfReviews: number;
   image: string;

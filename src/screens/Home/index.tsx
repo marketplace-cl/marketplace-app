@@ -8,6 +8,7 @@ import {
   ScrollView,
   Platform,
   TouchableOpacity,
+  RefreshControl,
 } from "react-native";
 import React, { useEffect } from "react";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
@@ -33,6 +34,14 @@ const Home = () => {
   const dispatch = useDispatch();
   const navigation = useAppNavigation();
 
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+    await pullData();
+    setRefreshing(false);
+  }, []);
+
   useEffect(() => {
     pullData();
   }, []);
@@ -42,6 +51,7 @@ const Home = () => {
       makeRequest.get("/products"),
       makeRequest.get("/categories"),
     ]);
+    console.log(productResponse.data);
     setProducts(productResponse.data);
     setCategories(categoryResponse.data);
     dispatch(productSlice.actions.setProducts(productResponse.data));
@@ -58,6 +68,9 @@ const Home = () => {
             ? StatusBar.currentHeight
             : Constants.statusBarHeight,
       }}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
     >
       <View className="flex-row gap-2 items-center p-4">
         <View className="flex-row flex-1 h-10 pl-1 border-neutral-300 border-2 items-center rounded-md">
@@ -109,7 +122,16 @@ const Home = () => {
 
       <View className="flex-row flex-wrap">
         {products.map((product, index) => (
-          <ProductCard key={index} {...product} />
+          <ProductCard
+            key={index}
+            _id={product._id}
+            category={product.category.name}
+            image={product.image}
+            price={product.price}
+            rate={product.rate}
+            title={product.title}
+            totalOfReviews={product.totalOfReviews}
+          />
         ))}
       </View>
     </ScrollView>

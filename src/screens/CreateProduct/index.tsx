@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Pressable,
+  ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Constants from "expo-constants";
@@ -27,18 +28,27 @@ export default function CreateProduct() {
     images: imagesList,
     quantity: "",
   });
+  const [imageInputs, setImageInputs] = useState([] as any);
 
   for (let i = 1; i <= counter; i++) {
     controllerList.push(
       <TextInput
         placeholder={`Imagem ${i}`}
         className="p-3 bg-gray-200 rounded w-full"
-        value={product.image}
-        onChangeText={(value) => imagesList.push(value)}
+        value={imageInputs[i]}
+        onChangeText={(value) => {
+          const updatedInputs: any = [...imageInputs];
+          updatedInputs[i] = value;
+          setImageInputs(updatedInputs);
+        }}
         key={i}
       />
     );
   }
+
+  useEffect(() => {
+    setImageInputs(product.images);
+  }, [product.images]);
 
   useEffect(() => {
     async function fetchItems() {
@@ -74,15 +84,33 @@ export default function CreateProduct() {
     }
   }
 
+  const addInputField = () => {
+    setImageInputs([...imageInputs, ""]);
+  };
+
+  const saveInputs = () => {
+    setProduct((prevState) => ({
+      ...prevState,
+      images: imageInputs.filter(
+        (input: any) => input !== "" || input == undefined
+      ), // Filtra e remove os campos de input vazios
+    }));
+  };
+
   return (
-    <View
+    <ScrollView
       style={{
         paddingTop:
           Platform.OS === "android"
             ? StatusBar.currentHeight
             : Constants.statusBarHeight,
       }}
-      className="flex-1 bg-[#f2f1f6] gap-y-3 p-4 items-center justify-center"
+      contentContainerStyle={{
+        alignItems: "center",
+        justifyContent: "center",
+        flex: 1,
+      }}
+      className="flex-1 bg-[#f2f1f6] gap-y-3 p-4"
     >
       <TextInput
         placeholder="Titulo"
@@ -106,9 +134,20 @@ export default function CreateProduct() {
 
       <Pressable
         className="bg-green-400 p-4 rounded-lg"
-        onPress={() => setCounter(counter + 1)}
+        onPress={() => {
+          setCounter(counter + 1);
+          addInputField();
+        }}
       >
         <Text className="text-white">Adicionar mais uma</Text>
+      </Pressable>
+      <Pressable
+        className="bg-green-400 p-4 rounded-lg"
+        onPress={() => {
+          saveInputs();
+        }}
+      >
+        <Text className="text-white">Salvar campos</Text>
       </Pressable>
       <TextInput
         placeholder="Quantidade"
@@ -139,6 +178,6 @@ export default function CreateProduct() {
       >
         <Text className="text-base text-white">Enviar</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }

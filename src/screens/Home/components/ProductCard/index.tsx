@@ -4,6 +4,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { productSlice } from "../../../../store/ProductSlice";
 import { useNavigation } from "@react-navigation/native";
+import { useAppNavigation } from "../../../../hooks";
 
 interface IProps {
   title: string;
@@ -13,7 +14,6 @@ interface IProps {
   totalOfReviews: number;
   image: string;
   _id: string;
-  comments: any[];
 }
 
 const ProductCard = ({
@@ -24,9 +24,8 @@ const ProductCard = ({
   title,
   totalOfReviews,
   _id,
-  comments,
 }: IProps) => {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   const dispatch = useDispatch();
 
   let pounds = Intl.NumberFormat("pt-BR", {
