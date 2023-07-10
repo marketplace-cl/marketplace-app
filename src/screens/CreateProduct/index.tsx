@@ -5,6 +5,7 @@ import {
   StatusBar,
   TextInput,
   TouchableOpacity,
+  Pressable,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Constants from "expo-constants";
@@ -16,12 +17,28 @@ export default function CreateProduct() {
   const [categories, setCategories] = useState([]);
   const currentUser = useAppSelector((state) => state.user.currentUser);
   const [selectedItem, setSelectedItem] = useState();
+  const [counter, setCounter] = useState(1);
+  let controllerList = [];
+  let imagesList: string[] = [];
   const [product, setProduct] = useState({
     title: "",
     price: "",
     image: "",
+    images: imagesList,
     quantity: "",
   });
+
+  for (let i = 1; i <= counter; i++) {
+    controllerList.push(
+      <TextInput
+        placeholder={`Imagem ${i}`}
+        className="p-3 bg-gray-200 rounded w-full"
+        value={product.image}
+        onChangeText={(value) => imagesList.push(value)}
+        key={i}
+      />
+    );
+  }
 
   useEffect(() => {
     async function fetchItems() {
@@ -49,6 +66,7 @@ export default function CreateProduct() {
         title: "",
         price: "",
         image: "",
+        images: imagesList,
         quantity: "",
       });
     } catch (error: any) {
@@ -79,11 +97,19 @@ export default function CreateProduct() {
         onChangeText={(value) => setProduct({ ...product, price: value })}
       />
       <TextInput
-        placeholder="Image"
+        placeholder="Imagem Principal"
         className="p-3 bg-gray-200 rounded w-full"
         value={product.image}
         onChangeText={(value) => setProduct({ ...product, image: value })}
       />
+      {controllerList}
+
+      <Pressable
+        className="bg-green-400 p-4 rounded-lg"
+        onPress={() => setCounter(counter + 1)}
+      >
+        <Text className="text-white">Adicionar mais uma</Text>
+      </Pressable>
       <TextInput
         placeholder="Quantidade"
         className="p-3 bg-gray-200 rounded w-full"

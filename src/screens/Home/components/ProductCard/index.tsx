@@ -47,7 +47,7 @@ const ProductCard = ({
       <Image
         source={{ uri: image }}
         alt={title}
-        className="h-[50%] w-full object-cover"
+        className="h-[50%] w-full object-contain"
       />
       <View className="p-2 bg-white flex-1 justify-around">
         <Text className="text-gray-400">{category}</Text>
