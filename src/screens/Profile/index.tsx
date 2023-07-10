@@ -6,20 +6,18 @@ import {
   Image,
   TouchableOpacity,
   Pressable,
-  Alert,
 } from "react-native";
-import React, { useEffect } from "react";
+import React from "react";
 import Constants from "expo-constants";
 import { Entypo, AntDesign, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import ProfileItem from "./components/ProfileItem";
 import LineDivider from "../../components/LineDivider";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppNavigation, useAppSelector } from "../../hooks";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { logout } from "../../store/UserSlice";
-import { useNavigation } from "@react-navigation/native";
 
 const Profile = () => {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   const currentUser = useAppSelector((state) => state.user.currentUser?.data);
   const dispatch = useAppDispatch();
 
@@ -102,6 +100,7 @@ const Profile = () => {
 
       {currentUser?.isAdmin && (
         <ProfileItem
+          onPress={() => navigation.navigate("CreateProduct")}
           title="Adicionar Produtos"
           subtitle="Área administrativa"
           icon={<MaterialIcons name="add-business" size={24} color="gray" />}

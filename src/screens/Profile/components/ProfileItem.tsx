@@ -6,14 +6,17 @@ type ProfileItemProps = {
   title: string;
   subtitle: string;
   icon: ReactNode;
+  onPress?: () => void;
 };
 export default function ProfileItem({
   icon,
   subtitle,
   title,
+  onPress,
 }: ProfileItemProps) {
   return (
     <TouchableOpacity
+      onPress={onPress}
       activeOpacity={0.8}
       className="bg-[#f5f5f5] mt-3 flex-row items-center justify-between p-4 rounded-lg"
     >

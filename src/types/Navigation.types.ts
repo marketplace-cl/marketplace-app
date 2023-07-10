@@ -6,6 +6,7 @@ export type RootStackParamList = {
   Login: undefined;
   Register: undefined;
   WishList: undefined;
+  CreateProduct: undefined;
 };
 
 export type ScreenNavigatonProp = StackNavigationProp<RootStackParamList>;

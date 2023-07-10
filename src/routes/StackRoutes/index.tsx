@@ -6,6 +6,7 @@ import Login from "../../screens/Auth/Login";
 import Register from "../../screens/Auth/Register";
 import WishList from "../../screens/WishList";
 import type { RootStackParamList } from "../../types/Navigation.types";
+import CreateProduct from "../../screens/CreateProduct";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -16,6 +17,7 @@ const StackRoutes = () => {
       <Stack.Screen name="ProductDetails" component={ProductDetails} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
+      <Stack.Screen name="CreateProduct" component={CreateProduct} />
       <Stack.Screen
         name="WishList"
         component={WishList}
