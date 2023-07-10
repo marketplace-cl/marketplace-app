@@ -4,8 +4,10 @@ import TabRoutes from "../TabRoutes";
 import ProductDetails from "../../screens/ProductDetails";
 import Login from "../../screens/Auth/Login";
 import Register from "../../screens/Auth/Register";
+import WishList from "../../screens/WishList";
+import type { RootStackParamList } from "../../types/Navigation.types";
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 
 const StackRoutes = () => {
   return (
@@ -14,6 +16,13 @@ const StackRoutes = () => {
       <Stack.Screen name="ProductDetails" component={ProductDetails} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
+      <Stack.Screen
+        name="WishList"
+        component={WishList}
+        options={{
+          presentation: "modal",
+        }}
+      />
     </Stack.Navigator>
   );
 };

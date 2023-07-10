@@ -6,6 +6,9 @@ import {
   Platform,
   StatusBar,
   ActivityIndicator,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import React from "react";
 import Constants from "expo-constants";
@@ -42,60 +45,66 @@ const Login = () => {
   };
 
   return (
-    <View
-      style={{
-        paddingTop:
-          Platform.OS === "android"
-            ? StatusBar.currentHeight
-            : Constants.statusBarHeight,
-      }}
-      className="p-4 flex-1"
-    >
-      <Pressable className="mt-4" onPress={navigation.goBack}>
-        <AntDesign name="arrowleft" size={25} color="black" />
-      </Pressable>
-      <View className="h-[20%]"></View>
-      <View className="justify-evenly flex-1">
-        <View>
-          <Text className="text-4xl font-bold">Hey,</Text>
-          <Text className="text-4xl font-bold">Faça login agora!</Text>
-        </View>
-        <View className="flex-row">
-          <Text className="text-gray-400">Já sou usuário / </Text>
-          <Pressable onPress={() => navigation.navigate("Register")}>
-            <Text className="font-bold">Criar conta </Text>
-          </Pressable>
-        </View>
-        <View className="gap-4">
-          <TextInput
-            placeholder="Usuário"
-            className="bg-gray-200 py-2 px-3 font-bold"
-            value={user.username}
-            onChangeText={(value) => setUser({ ...user, username: value })}
-          />
-          <TextInput
-            secureTextEntry
-            placeholder="Senha"
-            className="bg-gray-200 py-2 px-3 font-bold"
-            value={user.password}
-            onChangeText={(value) => setUser({ ...user, password: value })}
-          />
-        </View>
-        <View className="flex-row">
-          <Text className="text-gray-400">Esqueceu a senha? / </Text>
-          <Pressable>
-            <Text className="font-bold">Recuperar</Text>
-          </Pressable>
-        </View>
-        <Pressable className="bg-primary py-4 rounded-lg" onPress={handleLogin}>
-          {loading ? (
-            <ActivityIndicator color="white" />
-          ) : (
-            <Text className="text-center font-bold uppercase">Login Now</Text>
-          )}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        behavior="padding"
+        style={{
+          paddingTop:
+            Platform.OS === "android"
+              ? StatusBar.currentHeight
+              : Constants.statusBarHeight,
+        }}
+        className="p-4 flex-1"
+      >
+        <Pressable className="mt-4" onPress={navigation.goBack}>
+          <AntDesign name="arrowleft" size={25} color="black" />
         </Pressable>
-      </View>
-    </View>
+        <View className="h-[20%]"></View>
+        <View className="justify-evenly flex-1">
+          <View>
+            <Text className="text-4xl font-bold">Hey,</Text>
+            <Text className="text-4xl font-bold">Faça login agora!</Text>
+          </View>
+          <View className="flex-row">
+            <Text className="text-gray-400">Já sou usuário / </Text>
+            <Pressable onPress={() => navigation.navigate("Register")}>
+              <Text className="font-bold">Criar conta </Text>
+            </Pressable>
+          </View>
+          <View className="gap-4">
+            <TextInput
+              placeholder="Usuário"
+              className="bg-gray-200 p-3 font-bold"
+              value={user.username}
+              onChangeText={(value) => setUser({ ...user, username: value })}
+            />
+            <TextInput
+              secureTextEntry
+              placeholder="Senha"
+              className="bg-gray-200 p-3 font-bold"
+              value={user.password}
+              onChangeText={(value) => setUser({ ...user, password: value })}
+            />
+          </View>
+          <View className="flex-row">
+            <Text className="text-gray-400">Esqueceu a senha? / </Text>
+            <Pressable>
+              <Text className="font-bold">Recuperar</Text>
+            </Pressable>
+          </View>
+          <Pressable
+            className="bg-primary py-4 rounded-lg"
+            onPress={handleLogin}
+          >
+            {loading ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <Text className="text-center font-bold uppercase">Login Now</Text>
+            )}
+          </Pressable>
+        </View>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 

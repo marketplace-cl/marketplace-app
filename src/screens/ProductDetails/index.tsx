@@ -11,16 +11,16 @@ import {
 } from "react-native";
 import { AntDesign, SimpleLineIcons, FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { useSelector } from "react-redux";
 import Constants from "expo-constants";
 
 import React from "react";
 import About from "./components/About";
 import Review from "./components/Review";
+import { useAppSelector } from "../../hooks";
 
 const ProductDetails = () => {
   const navigation = useNavigation();
-  const product = useSelector((state) => state.product.selectedProduct);
+  const product = useAppSelector((state) => state?.products?.selectedProduct);
   const images = product.images;
   const [viewImage, setViewImage] = React.useState(product.image);
   const [selectedMenu, setSelectedMenu] = React.useState(true);
@@ -134,8 +134,9 @@ const ProductDetails = () => {
           {selectedMenu ? <About /> : <Review />}
         </View>
       </ScrollView>
+
       <View
-        className="fixed bottom-0 left-0 bg-white p-4 flex-row items-center justify-between shadow-lg"
+        className="fixed bottom-0 left-0 bg-white p-4 flex-row items-center justify-between shadow-lg pb-5"
         style={{
           borderTopColor: "#4AAD95",
           borderTopWidth: StyleSheet.hairlineWidth,

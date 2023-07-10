@@ -1,14 +1,15 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../../hooks";
 
 const About = () => {
-  const product = useSelector((state) => state.product.selectedProduct);
+  const product = useAppSelector((state) => state.products.selectedProduct);
   return (
     <View className="mt-4">
       <View className="flex-row">
         <Text className="mr-1 text-gray-500">Brand:</Text>
-        <Text className="text-secondary">{`${
+        {/* <Text className="text-secondary">{`${
           product.brand ?? "Uninformed"
         }`}</Text>
       </View>
@@ -16,7 +17,7 @@ const About = () => {
         <Text className="mr-1 text-gray-500">Description:</Text>
         <Text className="text-secondary">{`${
           product.description ?? "Uninformed"
-        }`}</Text>
+        }`}</Text> */}
       </View>
     </View>
   );
